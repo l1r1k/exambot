@@ -28,6 +28,9 @@ from library import ReadersOrm, AuthorsOrm, BooksOrm, BookLoansOrm
 from restaurant import ClientsOrm, WaitersOrm, DischesOrm, OrdersOrm, OrderItemsOrm
 from university import StudentsOrm, AttendanceOrm, GradesOrm, CoursesOrm
 
+# Keyboards
+from keyboards import DBS_ERD, dbs_keyboard
+
 load_dotenv()
 
 # constants
@@ -38,17 +41,6 @@ DB_HOST = os.getenv('DB_HOST')
 DB_PORT = os.getenv('DB_PORT')
 DB_USER = os.getenv('DB_USER')
 DB_PASS = os.getenv('DB_PASS')
-
-DBS_ERD = {
-    'universitydb': 'universitydb_erd.png',
-    'cinemadb': 'cinemadb_erd.png',
-    'librarydb': 'librarydb_erd.png',
-    'restaurantdb': 'restaurantdb_erd.png',
-    'albumshopdb': 'albumshopdb_erd.png',
-}
-
-# import keyboard after init dictionary of DBs
-from keyboards import dbs_keyboard
 
 CONNECTION_STRING = f'postgresql+asyncpg://{DB_USER}:{DB_PASS}@{DB_HOST}:{DB_PORT}/'
 
