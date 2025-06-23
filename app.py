@@ -47,6 +47,9 @@ DBS_ERD = {
     'albumshopdb': 'albumshopdb_erd.png',
 }
 
+# import keyboard after init dictionary of DBs
+from keyboards import dbs_keyboard
+
 CONNECTION_STRING = f'postgresql+asyncpg://{DB_USER}:{DB_PASS}@{DB_HOST}:{DB_PORT}/'
 
 DBS_TABLE_DESCRIPTION = {
@@ -123,7 +126,8 @@ dp = Dispatcher()
 
 @dp.message(CommandStart())
 async def command_start_handler(message: Message) -> None:
-    await message.answer(f'Привет, {message.from_user.full_name}.\n\nЧтобы получить ERD-модель или Датасеты (csv) таблиц из БД - {html.bold('напиши название БД из билета или введи номер БД из списка ниже')}.\n\nНапоминаю список наименования БД:\n\n{'\n'.join([f'{idx+1}) {name_db}' for idx, name_db in enumerate(DBS_ERD.keys())])}')
+    await message.answer(f'Привет, {message.from_user.full_name}.\n\nЧтобы получить ERD-модель или Датасеты (csv) таблиц из БД - {html.bold('напиши название БД из билета или введи номер БД из списка ниже')}.\n\nНапоминаю список наименования БД:\n\n{'\n'.join([f'{idx+1}) {name_db}' for idx, name_db in enumerate(DBS_ERD.keys())])}'
+                         , reply_markup=dbs_keyboard)
 
 @dp.message()
 async def echo_handler(message: Message) -> None:
